@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29319.158
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spendy.Data", "Spendy.Data\Spendy.Data.csproj", "{5351E146-2E12-4182-AFDD-D14575441827}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spendy", "Spendy\Spendy.csproj", "{ADDE7893-B782-4DA5-B55D-AAE5B445A94B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5351E146-2E12-4182-AFDD-D14575441827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5351E146-2E12-4182-AFDD-D14575441827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5351E146-2E12-4182-AFDD-D14575441827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5351E146-2E12-4182-AFDD-D14575441827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADDE7893-B782-4DA5-B55D-AAE5B445A94B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDE7893-B782-4DA5-B55D-AAE5B445A94B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDE7893-B782-4DA5-B55D-AAE5B445A94B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADDE7893-B782-4DA5-B55D-AAE5B445A94B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DD6465C-104F-4E73-B803-C072FCC9F0FF}
+	EndGlobalSection
+EndGlobal

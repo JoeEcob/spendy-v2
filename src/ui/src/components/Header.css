@@ -1,0 +1,39 @@
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  color: var(--color-blue-primary);
+  margin: 1rem 0 0;
+  font-weight: lighter;
+  font-size: 3rem;
+}
+
+.header a {
+  color: var(--color-blue-primary);
+  text-decoration: none;
+}
+
+.header .logout {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+
+.header nav {
+  margin-top: 1rem;
+  padding: 1rem 0;
+  border: solid 1px #594F4F;
+  border-left: none;
+  border-right: none;
+}
+
+.header nav a {
+  padding: 0 2rem;
+  color: #594F4F;
+}
+
+.header nav a:hover {
+  padding: 2rem;
+  color: #32c0b9;
+}
