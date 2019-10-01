@@ -5,6 +5,8 @@ namespace Spendy
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Spendy.Data;
+    using Spendy.Data.Interfaces;
 
     public class Startup
     {
@@ -19,6 +21,8 @@ namespace Spendy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<IDataStore, LiteDBDataStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,10 +1,11 @@
 ﻿namespace Spendy.Data.Interfaces
 {
-    using Monzo;
+    using System.Collections.Generic;
+    using Spendy.Data.Models;
 
     public interface IDataStore
     {
-        AccessToken GetMonzoAccessToken();
-        void SaveMonzoAccessToken(AccessToken token);
+        IEnumerable<Transaction> GetTransactions();
+        Transaction AddTransaction(Transaction transaction);
     }
 }
