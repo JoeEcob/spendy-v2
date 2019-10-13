@@ -5,7 +5,6 @@
 .header h1 {
   color: var(--color-blue-primary);
   margin: 1rem 0 0;
-  font-weight: lighter;
   font-size: 3rem;
 }
 

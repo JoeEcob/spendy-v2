@@ -1,0 +1,25 @@
+.year-progress {
+  display: block;
+  margin-top: 2rem;
+  vertical-align: middle;
+}
+
+.year-progress .graph-container {
+  display: inline-block;
+  width: 300px;
+  height: 30px;
+  border: 1px solid #ddd;
+}
+
+.year-progress .percentage {
+  display: inline-block;
+  height: 100%;
+  background-color: green;
+}
+
+.year-progress .label {
+  display: inline-block;
+  margin-top: .4rem;
+  margin-left: 1rem;
+  vertical-align: top;
+}
