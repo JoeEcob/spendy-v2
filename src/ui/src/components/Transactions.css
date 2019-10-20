@@ -1,0 +1,14 @@
+.transactions {
+  width: 100%;
+}
+
+.transactions th {
+  font-weight: lighter;
+  text-align: left;
+  color: #999;
+  font-size: 1.2rem;
+}
+
+.transactions tr {
+  margin-bottom: 1rem;
+}
