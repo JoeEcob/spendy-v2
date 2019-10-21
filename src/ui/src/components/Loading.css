@@ -1,0 +1,25 @@
+.loading-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.loading-icon:after {
+  content: " ";
+  height: 100%;
+  width: 100%;
+  display: block;
+  border-radius: 50%;
+  border: 3px #ddd solid;
+  border-top: 3px var(--color-blue-primary) solid;
+  animation: spinner 300ms linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
