@@ -1,0 +1,15 @@
+:root {
+  --color-blue-primary: #45ADA8;
+}
+
+.app {
+  max-width: 1200px;
+  padding: 0 2rem;
+  margin: 0 auto;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: lighter;
+  margin: 0 0 1.2rem 0;
+}
