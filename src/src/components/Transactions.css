@@ -3,12 +3,13 @@
 }
 
 .transactions th {
-  font-weight: lighter;
-  text-align: left;
   color: #999;
   font-size: 1.2rem;
+  font-weight: lighter;
+  padding-bottom: 1rem;
+  text-align: left;
 }
 
-.transactions tr {
-  margin-bottom: 1rem;
+.transactions td {
+  padding-bottom: 1rem;
 }
