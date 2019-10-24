@@ -17,11 +17,27 @@ const Transactions: React.FC = () => {
     if (data) {
       setTransactions(data);
     }
-  }, []);
+    console.log("hit");
+  }, [isLoading]);
 
-  function handleSubmit(event: React.MouseEvent<HTMLElement>) {
-    // do something...
-    alert("click");
+  function handleSubmit(event: React.FormEvent<HTMLElement>) {
+    event.preventDefault();
+
+    const transaction: Transaction = {
+      id: 3,
+      category: 3,
+      description: "test",
+      amount: 5,
+      dateCreated: new Date().getUTCDate(),
+      dateUpdated: new Date().getUTCDate()
+    };
+
+    const updatedList = transactions;
+    updatedList.push(transaction);
+
+    setTransactions(updatedList);
+    saveState(stateId, updatedList);
+    setLoading(true);
   }
 
   function renderTable(transactions: Array<Transaction>): JSX.Element {

@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface IProps {
-  onSubmit: (event: React.MouseEvent<HTMLElement>) => void;
+  onSubmit: (event: React.FormEvent<HTMLElement>) => void;
 }
 
 const AddNewTransaction: React.FC<IProps> = (props) => {
-  // todo - show form on click
+  const [isFormVisible, setFormVisibility] = useState(false);
+
+  function toggleForm() {
+    setFormVisibility(!isFormVisible);
+  }
+
+  function RenderForm() {
+    return (
+      <div className="add-transaction-container">
+        <form method="POST" onSubmit={props.onSubmit}>
+          <input type="text" name="Description" placeholder="Description..." />
+          <input type="submit" value="Submit" />
+        </form>
+        <span onClick={toggleForm}>x</span>
+      </div>
+    );
+  }
+
   return (
     <tr>
       <td colSpan={5}>
-        <button className="btn" onClick={props.onSubmit}>Add new</button>
+        {isFormVisible
+            ? RenderForm()
+            : <button className="btn" onClick={toggleForm}>Add new</button>}
       </td>
     </tr>
   );

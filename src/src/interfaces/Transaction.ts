@@ -5,8 +5,8 @@ interface Transaction {
   category: Category;
   description: string;
   amount: number;
-  dateCreated: Date;
-  dateUpdated: Date;
+  dateCreated: number;
+  dateUpdated: number;
 }
 
 export default Transaction;
