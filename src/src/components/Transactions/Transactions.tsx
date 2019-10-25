@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import AddNewTransaction from './AddNewTransaction';
-import Loading from './Loading';
-import Category from '../interfaces/Category';
-import Transaction from '../interfaces/Transaction';
-import { loadState, saveState } from '../localStorage';
+import AddNew from './AddNew';
+import Loading from '../Shared/Loading';
+import Category from '../../interfaces/Category';
+import Transaction from '../../interfaces/Transaction';
+import { loadState, saveState } from '../../localStorage';
 import './Transactions.css';
 
 const Transactions: React.FC = () => {
@@ -24,7 +24,7 @@ const Transactions: React.FC = () => {
     event.preventDefault();
 
     const transaction: Transaction = {
-      id: 3,
+      id: transactions.length,
       category: 3,
       description: "test",
       amount: 5,
@@ -63,7 +63,7 @@ const Transactions: React.FC = () => {
               </tr>
           )}
           {transactions.length === 0 ? <tr><td colSpan={5}>Nothing to show!</td></tr> : null}
-          <AddNewTransaction onSubmit={handleSubmit} />
+          <AddNew onSubmit={handleSubmit} />
         </tbody>
       </table>
     );

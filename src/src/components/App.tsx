@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import Header from './Header';
-import Charts from './Charts';
-import Transactions from './Transactions';
-import NotFound from './NotFound';
+import Header from './Shared/Header';
+import Charts from './Home/Charts';
+import Transactions from './Transactions/Transactions';
+import NotFound from './Shared//NotFound';
 
 const App: React.FC = () => {
   return (

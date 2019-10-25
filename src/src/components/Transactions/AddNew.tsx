@@ -4,7 +4,7 @@ interface IProps {
   onSubmit: (event: React.FormEvent<HTMLElement>) => void;
 }
 
-const AddNewTransaction: React.FC<IProps> = (props) => {
+const AddNew: React.FC<IProps> = (props) => {
   const [isFormVisible, setFormVisibility] = useState(false);
 
   function toggleForm() {
@@ -34,4 +34,4 @@ const AddNewTransaction: React.FC<IProps> = (props) => {
   );
 };
 
-export default AddNewTransaction;
+export default AddNew;
