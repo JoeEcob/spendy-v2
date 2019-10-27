@@ -1,0 +1,44 @@
+variables:
+  AWS_DEFAULT_REGION: eu-west-2
+  BUCKET_NAME: spendyv2.joeecob.uk
+
+build:
+  stage: build
+  image: node:alpine
+  cache:
+    paths:
+      - src/node_modules/
+  script:
+    - cd src/
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - src/build/
+    expire_in: 1 hour
+
+test:
+  stage: test
+  image: node:alpine
+  cache:
+    paths:
+      - src/node_modules/
+  script:
+    - cd src/
+    - npm install
+    - CI=true npm test
+
+deploy_prod:
+  stage: deploy
+  dependencies:
+    - build
+  image: python:alpine
+  script:
+    - 'which awscli || (pip install awscli)'
+    - aws s3 cp ./src/build/ s3://${BUCKET_NAME} --recursive
+  environment:
+    name: production
+    url: http://${BUCKET_NAME}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com/
+  only:
+    - master
+
