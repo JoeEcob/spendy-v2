@@ -1,0 +1,9 @@
+.home-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.home-container > section {
+  flex: 1 1 50%;
+}
