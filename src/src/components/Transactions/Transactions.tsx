@@ -17,7 +17,6 @@ const Transactions: React.FC = () => {
     if (data) {
       setTransactions(data);
     }
-    console.log("hit");
   }, [isLoading]);
 
   function handleSubmit(event: React.FormEvent<HTMLElement>) {
@@ -40,6 +39,24 @@ const Transactions: React.FC = () => {
     setLoading(true);
   }
 
+  function deleteTransaction(event: React.MouseEvent<HTMLElement>) {
+    event.preventDefault();
+
+    const parentElement = event.currentTarget.parentElement;
+    if (!parentElement) {
+      console.log("Unable to find parent element!");
+      return;
+    }
+
+    const id: number = Number(parentElement.dataset["id"]);
+
+    const excludingId: Transaction[] = transactions.filter(element => element.id !== id);
+
+    setTransactions(excludingId);
+    saveState(stateId, excludingId);
+    setLoading(true);
+  }
+
   function renderTable(transactions: Array<Transaction>): JSX.Element {
     return (
       <table className="transactions">
@@ -50,6 +67,7 @@ const Transactions: React.FC = () => {
             <th>Category</th>
             <th>Date Updated</th>
             <th>Date Created</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -60,6 +78,11 @@ const Transactions: React.FC = () => {
                 <td>{Category[transaction.category]}</td>
                 <td>{transaction.dateUpdated}</td>
                 <td>{transaction.dateCreated}</td>
+                <td data-id={transaction.id}>
+                  <span onClick={deleteTransaction}>
+                    Delete
+                  </span>
+                </td>
               </tr>
           )}
           {transactions.length === 0 ? <tr><td colSpan={5}>Nothing to show!</td></tr> : null}
