@@ -35,7 +35,7 @@ deploy_prod:
   image: python:alpine
   script:
     - 'which awscli || (pip install awscli)'
-    - aws s3 cp ./src/build/ s3://${BUCKET_NAME} --recursive
+    - aws s3 sync ./src/build/ s3://${BUCKET_NAME} --delete
   environment:
     name: production
     url: http://${BUCKET_NAME}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com/
