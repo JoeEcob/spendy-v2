@@ -1,6 +1,6 @@
 variables:
   AWS_DEFAULT_REGION: eu-west-2
-  BUCKET_NAME: spendyv2.joeecob.uk
+  BUCKET_NAME: spendy.cc
 
 build:
   stage: build
