@@ -5,9 +5,9 @@ import AddReminder from './AddReminder';
 
 const Reminders: React.FC = () => {
   const namespace = 'spendy.reminders';
-  const [daily, setDaily] = useState([] as string[]);
-  const [weekly, setWeekly] = useState([] as string[]);
-  const [monthly, setMonthly] = useState([] as string[]);
+  const [daily, setDaily] = useState<string[]>([]);
+  const [weekly, setWeekly] = useState<string[]>([]);
+  const [monthly, setMonthly] = useState<string[]>([]);
 
   useEffect(() => {
     setDaily(loadState(`${namespace}.daily`) as string[] || []);
@@ -39,7 +39,7 @@ const Reminders: React.FC = () => {
     return (
       <div key={index} className="reminder-item">
         <span className="label">{content}</span>
-        <span className="delete" onClick={() => deleteReminder(content, index)}>Delete</span>
+        <small className="btn" onClick={() => deleteReminder(content, index)}>Delete</small>
       </div>
     );
   }

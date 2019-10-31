@@ -2,6 +2,7 @@
 
 :root {
   --color-blue-primary: #45ADA8;
+  --color-blue-secondary: #32c0b9;
 }
 
 .app {
@@ -26,6 +27,14 @@ a:focus {
   border: 0;
 }
 
-.btn:hover {
+button:hover, input[type="submit"]:hover {
   background-color: #ddd;
+}
+
+a.btn, span.btn, small.btn {
+  color: #777;
+}
+
+a.btn:hover, span.btn:hover, small.btn:hover {
+  color: var(--color-blue-secondary);
 }

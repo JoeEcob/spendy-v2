@@ -1,12 +1,11 @@
 import Category from './Category';
 
-interface Transaction {
+interface ITransaction {
   id: number;
+  dateAdded: number;
   category: Category;
   description: string;
   amount: number;
-  dateCreated: number;
-  dateUpdated: number;
 }
 
-export default Transaction;
+export default ITransaction;

@@ -29,10 +29,10 @@ const AddReminder: React.FC<IProps> = (props) => {
       {isEditing
         ? <form onSubmit={handleSubmit}>
             <input ref={inputField} type="text" autoFocus />
-            <button type="submit">Save</button>
-            <span className="cancel"  title="Cancel" onClick={() => setIsEditing(false)}>x</span>
+            <button className="btn" title="Save" type="submit">Save</button>
+            <span className="btn"  title="Cancel" onClick={() => setIsEditing(false)}>x</span>
           </form>
-        : <span className="add" title="Add new" onClick={() => setIsEditing(true)}>+</span>}
+        : <span className="btn" title="Add new" onClick={() => setIsEditing(true)}>+</span>}
     </span>
   );
 }

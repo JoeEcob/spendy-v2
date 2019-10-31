@@ -1,92 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import AddNew from './AddNew';
+import TransactionForm from './TransactionForm';
+import TransactionRow from './TransactionRow';
 import Loading from '../Shared/Loading';
-import Category from '../../interfaces/Category';
-import Transaction from '../../interfaces/Transaction';
+import ITransaction from '../../interfaces/ITransaction';
 import { loadState, saveState } from '../../localStorage';
 import './Transactions.css';
 
 const Transactions: React.FC = () => {
   const stateId: string = "spendy.transactions";
   const [isLoading, setLoading] = useState(true);
-  const [transactions, setTransactions] = useState([] as Transaction[]);
+  const [isAdding, setIsAdding] = useState(false);
+  const [transactions, setTransactions] = useState<ITransaction[]>([]);
 
   useEffect(() => {
-    const data = loadState(stateId) as Transaction[];
     setLoading(false);
-    if (data) {
-      setTransactions(data);
-    }
-  }, [isLoading]);
 
-  function handleSubmit(event: React.FormEvent<HTMLElement>) {
-    event.preventDefault();
+    setTransactions(loadState(stateId) as ITransaction[] || []);
+  }, []);
 
-    const transaction: Transaction = {
-      id: transactions.length,
-      category: 3,
-      description: "test",
-      amount: 5,
-      dateCreated: new Date().getUTCDate(),
-      dateUpdated: new Date().getUTCDate()
-    };
+  useEffect(() => saveState(stateId, transactions), [transactions]);
 
-    const updatedList = transactions;
-    updatedList.push(transaction);
+  function updateTransaction(transaction: ITransaction) {
+    const index = transactions.findIndex(x => x.id === transaction.id);
 
-    setTransactions(updatedList);
-    saveState(stateId, updatedList);
-    setLoading(true);
-  }
-
-  function deleteTransaction(event: React.MouseEvent<HTMLElement>) {
-    event.preventDefault();
-
-    const parentElement = event.currentTarget.parentElement;
-    if (!parentElement) {
-      console.log("Unable to find parent element!");
+    if (index === -1) {
+      alert(`Unable to find transaction! Id: ${transaction.id}`);
       return;
     }
 
-    const id: number = Number(parentElement.dataset["id"]);
-
-    const excludingId: Transaction[] = transactions.filter(element => element.id !== id);
-
-    setTransactions(excludingId);
-    saveState(stateId, excludingId);
-    setLoading(true);
+    const copyOfTransactions = [...transactions];
+    copyOfTransactions[index] = transaction;
+    setTransactions(copyOfTransactions);
   }
 
-  function renderTable(transactions: Array<Transaction>): JSX.Element {
+  function addNewTransaction(transaction: ITransaction) {
+    transaction.id = transactions.length;
+    setTransactions(transactions.concat(transaction));
+    setIsAdding(false);
+  }
+
+  function deleteTransaction(id: number) {
+    setTransactions(transactions.filter(t => t.id !== id));
+  }
+
+  function renderTable(transactions: ITransaction[]): JSX.Element {
     return (
       <table className="transactions">
         <thead>
           <tr>
+            <th>Date</th>
+            <th>Category</th>
             <th>Description</th>
             <th>Amount</th>
-            <th>Category</th>
-            <th>Date Updated</th>
-            <th>Date Created</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td colSpan={5}>
+              {isAdding
+                ? <>
+                    <TransactionForm callback={addNewTransaction}/>
+                    <small className="btn" onClick={() => setIsAdding(false)}>Cancel</small>
+                  </>
+                : <small className="btn" onClick={() => setIsAdding(true)}>Add</small>}
+            </td>
+          </tr>
           {transactions.map(transaction =>
-              <tr key={transaction.id}>
-                <td>{transaction.description}</td>
-                <td>{transaction.amount}</td>
-                <td>{Category[transaction.category]}</td>
-                <td>{transaction.dateUpdated}</td>
-                <td>{transaction.dateCreated}</td>
-                <td data-id={transaction.id}>
-                  <span onClick={deleteTransaction}>
-                    Delete
-                  </span>
-                </td>
-              </tr>
+              <TransactionRow transaction={transaction} updateCallback={updateTransaction} deleteCallback={deleteTransaction} />
           )}
           {transactions.length === 0 ? <tr><td colSpan={5}>Nothing to show!</td></tr> : null}
-          <AddNew onSubmit={handleSubmit} />
         </tbody>
       </table>
     );
