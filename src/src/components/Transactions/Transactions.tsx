@@ -66,7 +66,9 @@ const Transactions: React.FC = () => {
                 : <small className="btn" onClick={() => setIsAdding(true)}>Add</small>}
             </td>
           </tr>
-          {transactions.map(transaction =>
+          {transactions
+            .sort((a, b) => b.dateAdded - a.dateAdded)
+            .map(transaction =>
               <TransactionRow transaction={transaction} updateCallback={updateTransaction} deleteCallback={deleteTransaction} />
           )}
           {transactions.length === 0 ? <tr><td colSpan={5}>Nothing to show!</td></tr> : null}

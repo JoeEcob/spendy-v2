@@ -17,6 +17,12 @@ const TransactionRow: React.FC<IProps> = (props) => {
     props.updateCallback(transaction);
   }
 
+  function handleDelete(id: number) {
+    if (window.confirm("Are you sure you want to delete this transaction")) {
+      props.deleteCallback(id);
+    }
+  }
+
   function renderRow(transaction: ITransaction): JSX.Element {
     return (
       <tr key={transaction.id}>
@@ -26,7 +32,7 @@ const TransactionRow: React.FC<IProps> = (props) => {
         <td>{transaction.amount}</td>
         <td>
           <small className="btn" onClick={() => setIsEditing(true)}>Edit</small>
-          <small className="btn" onClick={() => props.deleteCallback(transaction.id)}>
+          <small className="btn" onClick={() => handleDelete(transaction.id)}>
             Delete
           </small>
         </td>
