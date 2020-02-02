@@ -11,7 +11,7 @@ const Header: React.FC = () => {
         </NavLink>
         <nav>
           <NavLink to="/" activeClassName="active">Home</NavLink>
-          <NavLink to="/transactions" activeClassName="active">Transactions</NavLink>
+          <NavLink to="/fit-plan" activeClassName="active">Fit Plan</NavLink>
         </nav>
       </div>
     </header>

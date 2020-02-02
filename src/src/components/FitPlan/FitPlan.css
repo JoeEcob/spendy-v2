@@ -1,0 +1,13 @@
+.fit-plan {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.fit-plan table {
+  width: 100%;
+  min-width: 700px;
+}
+
+.fit-plan table td:nth-child(2) {
+  padding-left: 0; /* fix left padding for sub-headers */
+}

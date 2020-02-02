@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './Shared/Header';
 import Home from './Home/Home';
-import Transactions from './Transactions/Transactions';
+import FitPlan from './FitPlan/FitPlan';
 import NotFound from './Shared//NotFound';
 
 const App: React.FC = () => {
@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/transactions" component={Transactions} />
+        <Route path="/fit-plan" component={FitPlan} />
         <Route component={NotFound} />
       </Switch>
     </div>
