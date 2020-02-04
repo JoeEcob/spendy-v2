@@ -1,4 +1,5 @@
 .fit-plan {
+  margin-top: 2rem;
   width: 100%;
   overflow-x: auto;
 }
@@ -8,6 +9,23 @@
   min-width: 700px;
 }
 
-.fit-plan table td:nth-child(2) {
-  padding-left: 0; /* fix left padding for sub-headers */
+.fit-plan th {
+  padding-top: 0;
+}
+
+.fit-plan .row-header {
+  padding-left: 0;
+}
+
+.fit-plan .btn.add {
+  text-align: right;
+}
+
+.fit-plan .editing input {
+  width: 90%;
+  margin: 0 0 .5rem;
+}
+
+.fit-plan .editing .btn {
+  padding: .2rem .5rem;
 }

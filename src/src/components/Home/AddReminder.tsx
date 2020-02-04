@@ -8,21 +8,16 @@ const AddReminder: React.FC<IProps> = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const inputField = useRef<HTMLInputElement>(null!);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!inputField || !inputField.current) {
+    if (!inputField?.current?.value) {
       return;
     }
 
-    const value = inputField.current.value
-    if (!value) {
-      return;
-    }
-
-    props.callback(value);
     setIsEditing(false);
-  }
+    props.callback(inputField.current.value);
+  };
 
   return (
     <span>
@@ -32,7 +27,7 @@ const AddReminder: React.FC<IProps> = (props) => {
             <button className="btn" title="Save" type="submit">Save</button>
             <span className="btn"  title="Cancel" onClick={() => setIsEditing(false)}>x</span>
           </form>
-        : <span className="btn" title="Add new" onClick={() => setIsEditing(true)}>+</span>}
+        : <span className="btn" title="Add reminder" onClick={() => setIsEditing(true)}>+</span>}
     </span>
   );
 }

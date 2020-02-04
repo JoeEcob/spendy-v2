@@ -1,29 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import Loading from '../Shared/Loading';
 import { loadState, saveState } from '../../localStorage';
+import FitPlanCell from './FitPlanCell';
+import IDataTable from './IDataTable';
 import './FitPlan.css';
 
 const FitPlan: React.FC = () => {
   const stateId: string = "spendy.fitPlan";
-  const daysOfWeek: {[key: string]: string} = {
-    "Mon": "Monday",
-    "Tue": "Tuesday",
-    "Wed": "Wednesday",
-    "Thur": "Thursday",
-    "Fri": "Friday",
-    "Sat": "Saturday",
-    "Sun": "Sunday"
-  };
+  const columnHeaders = ["Morning", "Lunch", "Dinner", "Evening"];
+  const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   const [isLoading, setLoading] = useState(true);
-  const [fitPlanData, setFitPlanData] = useState([]);
+
+  /**
+   * food: {
+   *   columnHeader1: [mon, tues, wed, thurs, fri, sat, sun]
+   *   columnHeader2: [mon, tues, wed, thurs, fri, sat, sun]
+   * }
+   */
+  const [foodData, setFoodData] = useState<IDataTable>(initNewDataTable());
+  const [fitnessData, setFitnessData] = useState<IDataTable>(initNewDataTable());
 
   useEffect(() => {
-    setFitPlanData(loadState(stateId) as [] || []);
+    const foodData = loadState(`${stateId}.food`) as IDataTable;
+    if (foodData) {
+      setFoodData(foodData);
+    }
+
+    const fitnessData = loadState(`${stateId}.fitness`) as IDataTable;
+    if (fitnessData) {
+      setFitnessData(fitnessData);
+    }
 
     setLoading(false);
   }, []);
 
-  useEffect(() => saveState(stateId, fitPlanData), [fitPlanData]);
+  useEffect(() => saveState(`${stateId}.food`, foodData), [foodData]);
+  useEffect(() => saveState(`${stateId}.fitness`, fitnessData), [fitnessData]);
+
+  function initNewDataTable(): IDataTable {
+    const result: IDataTable = {};
+    for (const header of columnHeaders) {
+      // By initing an array to the correct size it means we can shortcut a
+      // validation check in the handSubmit method.
+      result[header] = daysOfWeek.map(value => "");
+    }
+    return result;
+  }
+
+  function handleFoodSubmit(newValue: string, columnHeader: string, dayOfWeekIndex: number): void {
+    // TODO - fix this hacky way of avoiding state mutation
+    var newFoodData = JSON.parse(JSON.stringify(foodData))
+
+    // This should be an array of data by day of week number
+    const dataForColumnHeaderByDayOfWeek = newFoodData[columnHeader];
+
+    dataForColumnHeaderByDayOfWeek[dayOfWeekIndex] = newValue;
+    setFoodData(newFoodData);
+  }
+
+  function handleFitnessSubmit(newValue: string, columnHeader: string, dayOfWeekIndex: number): void {
+    // TODO - fix this hacky way of avoiding state mutation
+    var newFitnessData = JSON.parse(JSON.stringify(fitnessData))
+
+    // This should be an array of data by day of week number
+    const dataForColumnHeaderByDayOfWeek = newFitnessData[columnHeader];
+
+    dataForColumnHeaderByDayOfWeek[dayOfWeekIndex] = newValue;
+    setFitnessData(newFitnessData);
+  }
 
   function renderTable(): JSX.Element {
     return (
@@ -32,29 +76,26 @@ const FitPlan: React.FC = () => {
           <tr>
             <th></th>
             <th></th>
-            <th>Morning</th>
-            <th>Lunch</th>
-            <th>Dinner</th>
-            <th>Evening</th>
+            {columnHeaders.map(header => <th key={header}>{header}</th>)}
           </tr>
         </thead>
         <tbody>
-          {Object.keys(daysOfWeek).map(key => (
-            <React.Fragment key={key}>
+          {daysOfWeek.map((dayOfWeek, dayOfWeekIndex) => (
+            <React.Fragment key={dayOfWeek}>
               <tr>
-                <td rowSpan={2} title={daysOfWeek[key]}>{key}</td>
-                <td>Food</td>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td> </td>
+                <td rowSpan={2}>{dayOfWeek}</td>
+                <td className="row-header">Food</td>
+                {columnHeaders.map(colHeader => <FitPlanCell
+                  key={`food${colHeader}`}
+                  callback={value => handleFoodSubmit(value, colHeader, dayOfWeekIndex)}
+                  text={foodData[colHeader][dayOfWeekIndex]} />)}
               </tr>
               <tr>
-                <td>Fitness</td>
-                <td> </td>
-                <td> </td>
-                <td> </td>
-                <td> </td>
+                <td className="row-header">Fitness</td>
+                {columnHeaders.map(colHeader => <FitPlanCell
+                  key={`fitness${colHeader}`}
+                  callback={value => handleFitnessSubmit(value, colHeader, dayOfWeekIndex)}
+                  text={fitnessData[colHeader][dayOfWeekIndex]} />)}
               </tr>
             </React.Fragment>
           ))}

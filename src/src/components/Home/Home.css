@@ -6,4 +6,5 @@
 
 .home-container > section {
   flex: 1 1 50%;
+  margin-top: 2rem;
 }
