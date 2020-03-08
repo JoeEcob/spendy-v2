@@ -12,10 +12,6 @@ const FitPlanCell: React.FC<IProps> = (props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!text) {
-      return;
-    }
-
     setIsEditing(false);
     props.callback(text);
   };
