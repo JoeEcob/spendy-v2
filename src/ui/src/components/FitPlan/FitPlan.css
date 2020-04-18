@@ -11,21 +11,43 @@
 
 .fit-plan th {
   padding-top: 0;
+  text-align: center;
+  color: var(--color-text-secondary);
 }
 
 .fit-plan .row-header {
   padding-left: 0;
+  color: var(--color-text-secondary);
 }
 
-.fit-plan .btn.add {
-  text-align: right;
+.fit-plan td.editable-cell {
+  cursor: pointer;
 }
 
-.fit-plan .editing input {
+.fit-plan td.editable-cell:hover {
+  background-color: #eee;
+}
+
+.fit-plan td.editable-cell.editing {
+  padding: .5rem;
+  cursor: default;
+}
+
+.fit-plan td.editable-cell.editing:hover {
+  background-color: #fff;
+}
+
+.fit-plan form input {
   width: 90%;
   margin: 0 0 .5rem;
 }
 
-.fit-plan .editing .btn {
+.fit-plan form .btn {
   padding: .2rem .5rem;
+}
+
+/* Remove bottom border on last row - the penultimate row spans 2 so we have to bodge it */
+.fit-plan tr:nth-last-child(2) td:first-child,
+.fit-plan tr:last-child td {
+  border-bottom: none;
 }

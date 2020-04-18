@@ -83,7 +83,7 @@ const FitPlan: React.FC = () => {
           {daysOfWeek.map((dayOfWeek, dayOfWeekIndex) => (
             <React.Fragment key={dayOfWeek}>
               <tr>
-                <td rowSpan={2}>{dayOfWeek}</td>
+                <td className="row-header"rowSpan={2}>{dayOfWeek}</td>
                 <td className="row-header">Food</td>
                 {columnHeaders.map(colHeader => <FitPlanCell
                   key={`food${colHeader}`}

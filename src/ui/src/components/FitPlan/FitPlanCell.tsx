@@ -12,21 +12,35 @@ const FitPlanCell: React.FC<IProps> = (props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setText(text.trim());
+
     setIsEditing(false);
     props.callback(text);
   };
 
+  const handleClick = () => {
+    if (isEditing) {
+      return;
+    }
+
+    setIsEditing(true);
+  };
+
+  const cancelEdit = () => {
+    // Revert to the original input
+    setText(props.text);
+    setIsEditing(false);
+  };
+
   return (
-    <td className="editable-cell">
+    <td className={`editable-cell ${isEditing ? "editing" : ""}`} onClick={handleClick} title={text ? "Edit" : "Add new"}>
       {isEditing
-        ? <form className="editing" onSubmit={handleSubmit}>
+        ? <form onSubmit={handleSubmit}>
             <input type="text" value={text} onChange={input => setText(input.target.value)} autoFocus />
             <button className="btn">Save</button>
-            <small className="btn" onClick={() => setIsEditing(false)}>Cancel</small>
+            <small className="btn" onClick={cancelEdit}>Cancel</small>
           </form>
-        : text
-          ? <div className="btn edit" title="Edit entry" onClick={() => setIsEditing(true)}>{text}</div>
-          : <div className="btn add" title="Add entry" onClick={() => setIsEditing(true)}>+</div>}
+        : text}
     </td>
   );
 };

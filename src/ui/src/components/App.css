@@ -3,6 +3,8 @@
 :root {
   --color-blue-primary: #45ADA8;
   --color-blue-secondary: #32c0b9;
+  --color-text-primary: #222;
+  --color-text-secondary: #606c76;
 }
 
 .app {
@@ -10,12 +12,13 @@
   padding: 0 2rem;
   margin: 0 auto 2rem auto;
   font-size: 16px;
-  color: #606c76;
+  color: var(--color-text-primary);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: lighter;
   margin: 0 0 1.2rem 0;
+  color: var(--color-text-secondary);
 }
 
 a:focus {
