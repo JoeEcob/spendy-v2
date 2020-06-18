@@ -4,7 +4,6 @@
     using Microsoft.Extensions.Logging;
     using Spendy.API.Models;
     using Spendy.API.Services;
-    using System.Linq;
     using System.Threading.Tasks;
 
     [ApiController]
